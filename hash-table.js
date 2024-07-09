@@ -1,6 +1,7 @@
 class HashTable {
   constructor(size) {
     this.data = new Array(size);
+    this.numItems = 0;
   }
 
   _hash(key) {
@@ -13,7 +14,27 @@ class HashTable {
     return hash;
   }
 
+  getHashTable() {
+    return this.data;
+  }
+
+  _resize() {
+    console.log("Resizing hash table");
+
+    const newHashTable = this.data.length * 2;
+
+    this.data.forEach((bucket) => {
+      if (!bucket) {
+        console.log("Empty bucket");
+        return;
+      }
+    });
+
+    console.log(newHashTable);
+  }
+
   set(key, value) {
+    this.numItems++;
     const hash = this._hash(key);
 
     if (this.data[hash] === undefined) {
@@ -21,6 +42,10 @@ class HashTable {
     }
 
     this.data[hash][key] = value;
+
+    if (this.numItems > this.data.length * 0.7) {
+      this._resize();
+    }
   }
 
   get(key) {
@@ -34,12 +59,11 @@ class HashTable {
   }
 }
 
-const newHashTable = new HashTable(50);
+const newHashTable = new HashTable(5);
 
-newHashTable.set("name", "Oka");
-newHashTable.set("age", 25);
-newHashTable.set("city", "Lagos");
+newHashTable.set("name", "oka");
+newHashTable.set("language", "javascript");
+newHashTable.set("sex", "male");
+newHashTable.set("age", 26);
 
-console.log(newHashTable.get("name"));
-console.log(newHashTable.get("age"));
-console.log(newHashTable.get("city"));
+console.log(newHashTable.getHashTable());
