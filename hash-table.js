@@ -56,28 +56,24 @@ class HashTable {
   get(key) {
     const bucket = this.data[this._hash(key)];
 
-    console.log(this.data);
-
-    console.log(bucket, this._hash(key));
-
     if (!bucket) {
-      console.log("here");
       return undefined;
     }
 
-    // return bucket.forEach((data) => {
-    //   if (data[0] === key) {
-    //     return data[1];
-    //   }
-    // });
+    for (let i = 0; i < bucket.length; i++) {
+      if (bucket[i][0] === key) {
+        return bucket[i][1];
+      }
+    }
   }
 }
 
 const newHashTable = new HashTable(5);
 
-newHashTable.set("gender", "male");
+newHashTable.set("dataStructure", "hashTable");
 newHashTable.set("fruits", "grapes");
 newHashTable.set("language", "japanese");
 newHashTable.set("profession", "programmer");
 
-console.log(newHashTable.get("gender"));
+console.log(newHashTable.getHashTable());
+console.log(newHashTable.get("fruits"));
